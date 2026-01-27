@@ -2,15 +2,10 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useEffect } from "react";
 
 const formSchema = z.object({
-  revenue: z.enum({
-	less_10k: "less_10k",
-	10k_50k: "10k_50k",
-	50k_plus: "50k_plus"
-  }).refine(val => val !== "", {
-    message: "Selecciona una opción",
+  revenue: z.enum(["less_10k", "10k_50k", "50k_plus"], {
+    errorMap: () => ({ message: "Selecciona un rango de facturación" }),
   }),
   email: z.string().email("Email inválido"),
   whatsapp: z.string().min(8, "Número incompleto"),
@@ -21,7 +16,7 @@ export default function QualifyingForm() {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (data: { revenue: string; email: string; whatsapp: string; }) => {
+  const onSubmit = (data: any) => {
     if (data.revenue === "less_10k") {
       alert("No cumples el perfil mínimo, pero te enviaremos una guía gratuita.");
       // Redirigir a Lead Magnet
@@ -30,10 +25,6 @@ export default function QualifyingForm() {
       window.location.href = "https://calendly.com/vexcala/sesion";
     }
   };
-
-  useEffect(() => {
-    window.location.href = "https://calendly.com/vexcala/sesion";
-  }, []); // Usar useEffect para la redirección
 
   return (
     <section className="py-20 bg-slate-900 rounded-2xl border border-slate-800 p-8 max-w-xl mx-auto">
