@@ -5,7 +5,8 @@ import * as z from "zod";
 
 const formSchema = z.object({
   revenue: z.enum(["less_10k", "10k_50k", "50k_plus"], {
-    errorMap: () => ({ message: "Selecciona un rango de facturación" }),
+    required_error: "Selecciona un rango de facturación",
+    invalid_type_error: "Selecciona una opción válida",
   }),
   email: z.string().email("Email inválido"),
   whatsapp: z.string().min(8, "Número incompleto"),
