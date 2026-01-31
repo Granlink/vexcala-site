@@ -1,32 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/sections/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Vexcala | Departamento de Adquisición Digital",
-  description: "Ingeniería de ventas para negocios que facturan +$X. Generamos flujo constante de clientes calificados.",
+  description: "Infraestructura de crecimiento comercial. Diseñamos sistemas de ventas predecibles para negocios que buscan escalabilidad y control.",
   openGraph: {
-    title: "Vexcala - Adquisición de Clientes High Ticket",
-    description: "Convertimos tu inversión en activos de venta predecibles.",
+    title: "Vexcala - Tu Departamento de Adquisición",
+    description: "Escala tu facturación con sistemas de ingeniería de ventas.",
     url: "https://vexcala.com",
     siteName: "Vexcala",
-    images: [
-      {
-        url: "/og-image.jpg", // Luego diseñaremos esta imagen
-        width: 1200,
-        height: 630,
-      },
-    ],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
     locale: "es_ES",
     type: "website",
   },
@@ -38,11 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className="antialiased bg-slate-950 text-white font-sans"
-      >
-        {children}
+    <html lang="es" className="scroll-smooth">
+      <body className={`${inter.className} bg-slate-950 text-slate-50 antialiased`}>
+        <Navbar />
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );

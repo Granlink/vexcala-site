@@ -1,18 +1,32 @@
-// Si usas el alias @/ que configuramos en tsconfig.json
 import Hero from "@/components/sections/Hero";
-import SocialProof from "@/components/sections/SocialProof";
-import QualifyingForm from "@/components/sections/QualifyingForm";
-import ValueProps from "@/components/sections/ValueProps";
+import Problem from "@/components/sections/Problem";
+import NotAgency from "@/components/sections/NotAgency";
+import System from "@/components/sections/System";
+import Fit from "@/components/sections/Fit";
+import Impact from "@/components/sections/Impact";
+import Process from "@/components/sections/Process";
+import Apply from "@/components/sections/Apply";
+import FinalCTA from "@/components/sections/FinalCTA";
+import FAQ from "@/components/sections/FAQ";
+import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950">
-      <Hero />
-      <SocialProof />
-      <div id="apply">
-        <QualifyingForm />
-      </div>
-      <ValueProps />
-    </main>
+    <>
+      {/* Sección de Impacto Inicial */}
+     <main>
+  <Hero />
+  <Problem />
+  <NotAgency />
+  <System />
+  <Fit />
+  <Impact />
+  <Process />
+  <Apply />
+  <FinalCTA />
+  <FAQ />
+  <Footer />
+</main>
+    </>
   );
 }
