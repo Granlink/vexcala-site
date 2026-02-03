@@ -1,47 +1,40 @@
+"use client";
+
 import React from 'react';
-import { ArrowRight, MessageCircle } from 'lucide-react';
+import { ArrowRight, Activity } from 'lucide-react';
 
 export default function FinalCTA() {
   return (
-    <section id="final-cta" className="py-24 bg-slate-950 relative overflow-hidden">
-      {/* Elemento visual de cierre: Un brillo radial suave */}
-      <div className="absolute inset-0 bg-blue-600/5 [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)] pointer-events-none" />
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto p-12 md:p-20 rounded-[3rem] border border-blue-500/20 bg-gradient-to-b from-slate-900/50 to-slate-950 text-center">
+    <section id="section-final-cta" className="py-24 bg-[#0a0a0a]">
+      <div className="container mx-auto px-6">
+        <div className="relative group">
+          {/* Fondo con degradado sutil y efecto de brillo */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/20 to-orange-900/20 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
           
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 leading-tight">
-            Si tu negocio ya vende pero tu crecimiento no es predecible, <br />
-            <span className="text-blue-500 italic">es momento de construir un sistema.</span>
-          </h2>
-
-          <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
-            VEXCALA trabaja con un número limitado de negocios para asegurar foco y resultados sostenibles.
-          </p>
-
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
-            <a 
-              href="#apply" 
-              className="w-full md:w-auto bg-blue-600 hover:bg-blue-500 text-white px-10 py-5 rounded-full font-bold text-lg transition-all shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 active:scale-95"
-            >
-              Agendar llamada estratégica
-              <ArrowRight className="w-5 h-5" />
-            </a>
+          <div className="relative bg-black border border-white/10 rounded-3xl p-8 md:p-16 overflow-hidden flex flex-col items-center text-center">
             
-            <a 
-  href="https://wa.me/573028267788?text=Hola%20VEXCALA,%20vengo%20de%20la%20web.%20Me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Sales%20Operating%20System." 
-  target="_blank"
-  rel="noopener noreferrer"
-  className="w-full md:w-auto flex items-center justify-center gap-2 text-slate-300 hover:text-white font-medium px-10 py-5 transition-colors border border-slate-800 rounded-full hover:bg-slate-900"
->
-  <MessageCircle className="w-5 h-5 text-green-500" />
-  Hablar por WhatsApp primero
-</a>
-          </div>
+            {/* Elemento Decorativo: Pulso de Datos */}
+            <div className="mb-8 p-4 rounded-full bg-orange-500/10 border border-orange-500/20 animate-pulse">
+              <Activity className="w-8 h-8 text-orange-500" />
+            </div>
 
-          <p className="text-2xl md:text-3xl font-light text-slate-500">
-            El crecimiento no se improvisa. <span className="text-white font-semibold italic">Se diseña.</span>
-          </p>
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+              ¿Listo para dejar de <span className="text-orange-500">improvisar?</span>
+            </h2>
+
+            <p className="text-slate-400 text-lg md:text-xl max-w-2xl mb-10 font-light leading-relaxed">
+              Aplica para instalar el <span className="text-white font-medium">ID Mechanism</span> en tu estructura comercial y transfiere la incertidumbre a un sistema de ingeniería.
+            </p>
+
+            <button className="bg-[#FF8C00] hover:bg-[#FF8C00]/90 text-black font-black py-4 px-8 rounded-[8px]">
+              OBTENER MI ÍNDICE DE FRAGILIDAD
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <p className="mt-8 text-slate-600 text-[10px] uppercase tracking-[0.2em] font-mono">
+              Tiempo estimado de diagnóstico: 3 minutos.
+            </p>
+          </div>
         </div>
       </div>
     </section>

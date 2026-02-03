@@ -1,103 +1,62 @@
+"use client";
 import React from 'react';
-import { Scale, Filter, Zap, Target, ShieldCheck, BarChart } from 'lucide-react';
-
-const principles = [
-  { 
-    title: "Sistemas > tácticas", 
-    icon: <Scale className="w-5 h-5 text-blue-500" />,
-    desc: "Las tácticas ganan batallas, pero los sistemas ganan la guerra del crecimiento."
-  },
-  { 
-    title: "Calificación antes que volumen", 
-    icon: <Filter className="w-5 h-5 text-blue-500" />,
-    desc: "Hablar con menos personas, pero con las correctas, es el secreto de la escala."
-  },
-  { 
-    title: "Automatización con criterio", 
-    icon: <Zap className="w-5 h-5 text-blue-500" />,
-    desc: "No eliminamos humanos, liberamos su talento del trabajo repetitivo."
-  },
-  { 
-    title: "Previsibilidad como ventaja", 
-    icon: <Target className="w-5 h-5 text-blue-500" />,
-    desc: "Un negocio predecible vale 10 veces más que uno que solo tiene suerte."
-  },
-  { 
-    title: "Infraestructura Escalable", 
-    icon: <ShieldCheck className="w-5 h-5 text-blue-500" />,
-    desc: "Construimos para el negocio que serás en 2 años, no solo para el de hoy."
-  },
-  { 
-    title: "Datos sobre Opiniones", 
-    icon: <BarChart className="w-5 h-5 text-blue-500" />,
-    desc: "Tomamos decisiones basadas en métricas reales de conversión, no en suposiciones."
-  },
-];
+import { Zap, ShieldCheck, TrendingUp, AlertCircle } from 'lucide-react';
 
 export default function Impact() {
-  return (
-    <section id="impact" className="py-24 bg-slate-950 overflow-hidden">
-      <div className="container mx-auto px-6 mb-16">
-        <div className="text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Los negocios que crecen no lo hacen por suerte.
-          </h2>
-          <p className="text-slate-500 text-xl font-light italic">
-            Se rigen por principios de ingeniería comercial.
-          </p>
-        </div>
-      </div>
+  const slides = [
+    {
+      icon: <Zap className="w-5 h-5 text-orange-500" />,
+      text: "Las empresas que contactan leads en <5 min tienen 21x más éxito. VOS lo hace en 0 seg."
+    },
+    {
+      icon: <ShieldCheck className="w-5 h-5 text-orange-500" />,
+      text: "El 80% del gasto en Ads se pierde en leads no calificados. La Ingeniería de Intención corta esa fuga."
+    },
+    {
+      icon: <TrendingUp className="w-5 h-5 text-orange-500" />,
+      text: "Sistemas predecibles superan a tácticas virales en un 400% en LTV (Life Time Value)."
+    },
+    {
+      icon: <AlertCircle className="w-5 h-5 text-orange-500" />,
+      text: "La falta de seguimiento mata el 70% de las ventas potenciales. El VOS nunca olvida un lead."
+    }
+  ];
 
-      {/* Contenedor del Carrusel Infinito con Cards Completas */}
-      <div className="relative flex overflow-hidden select-none group">
-        <div 
-          className="flex flex-nowrap gap-8 py-4 animate-marquee-slower"
-          style={{
-            display: 'flex',
-            width: 'max-content'
-          }}
-        >
-          {/* Duplicamos el contenido para el loop infinito perfecto */}
-          {[...principles, ...principles].map((p, i) => (
+  return (
+    <section id="section-impact" className="py-12 bg-[#FF8C00]/5 border-y border-orange-500/10 overflow-hidden">
+      <div className="flex whitespace-nowrap overflow-hidden group">
+        {/* Duplicamos los slides para crear el efecto infinito real */}
+        <div className="flex animate-marquee group-hover:pause-animation">
+          {[...slides, ...slides].map((slide, i) => (
             <div 
               key={i} 
-              className="flex flex-col gap-4 p-8 rounded-3xl border border-slate-800 bg-slate-900/20 w-[350px] md:w-[400px] hover:border-blue-500/50 transition-colors"
+              className="flex items-center gap-4 px-12 py-2 border-r border-white/5"
             >
-              <div className="flex items-center gap-4">
-                <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20">
-                  {p.icon}
-                </div>
-                <h3 className="text-lg font-bold text-white italic tracking-tight">
-                  {p.title}
-                </h3>
+              <div className="p-2 bg-orange-500/10 rounded-full">
+                {slide.icon}
               </div>
-              <p className="text-slate-500 text-sm leading-relaxed">
-                {p.desc}
-              </p>
+              <span className="text-white/80 font-medium text-sm md:text-base tracking-wide uppercase italic">
+                {slide.text}
+              </span>
             </div>
           ))}
         </div>
-
-        {/* Inyección de Keyframes y Animación */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          @keyframes marquee-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-marquee-slower {
-            animation: marquee-scroll 40s linear infinite;
-          }
-          .group:hover .animate-marquee-slower {
-            animation-play-state: paused;
-          }
-        `}} />
       </div>
 
-      <div className="text-center mt-20">
-        <p className="text-slate-600 text-sm uppercase tracking-[0.3em] font-bold">
-          El crecimiento real se estructura, no se improvisa.
-        </p>
-      </div>
+      {/* Estilos CSS Inline para la Animación Marquee */}
+      <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: flex;
+          animation: marquee 40s linear infinite;
+        }
+        .pause-animation:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 }

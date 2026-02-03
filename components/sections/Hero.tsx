@@ -1,70 +1,67 @@
+"use client";
+
 import React from 'react';
-import { ArrowRight, } from 'lucide-react';
+import { Radar } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-slate-950 pt-20 overflow-hidden">
-      {/* Elementos de fondo: Gradientes técnicos para profundidad */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full">
-        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-600/10 blur-[120px] rounded-full" />
+    <section id="section-hero" aria-labelledby="hero-title" className="relative min-h-[90vh] flex items-center justify-center bg-[#000000] overflow-hidden">
+      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-[#FF8C00]/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="container mx-auto px-6 relative z-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="inline-block px-3 py-1 rounded-full bg-[rgba(255,140,0,0.1)] border border-[#FF8C00] text-[#FF8C00] text-[10px] font-bold tracking-widest uppercase mb-6"
+        >
+          <Radar className="w-4 h-4 inline mr-2" />
+          INFRAESTRUCTURA COMERCIAL DE ÉLITE
+        </motion.div>
+        <motion.h1
+          id="hero-title"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+            className="text-5xl md:text-7xl font-black tracking-tight leading-tight text-white mb-6"
+        >
+          Deja de administrar el caos. <br /> Empieza a gestionar una <span className="text-[#FF8C00]">Infraestructura de Ventas.</span>
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-lg md:text-xl text-gray-400 max-w-[700px] mx-auto mb-8"
+        >
+          VEXCALA Sales Operating System (VOS): infraestructura comercial y automatización comercial para generar citas calificadas B2B cada 24 horas.
+        </motion.p>
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="relative isolate overflow-hidden bg-[#FF8C00] text-black font-black px-8 py-4 rounded-xl shadow-[0_0_36px_rgba(255,140,0,0.45)] hover:scale-105 transition-transform"
+        >
+          <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent)] shimmer-sweep" />
+          INICIAR TEST DE FRAGILIDAD COMERCIAL
+        </motion.button>
+        <p className="text-xs text-gray-400 mt-4">
+          Toma 2 minutos. Detecta fallos en tu sistema actual.
+        </p>
       </div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          
-          {/* Tag de Categoría */}
-         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-medium mb-8 animate-fade-in">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-          </span>
-          Infraestructura Comercial de Élite
-        </div>
-
-          {/* H1: El Gancho (Dolor + Resultado) */}
-          <h1 className="text-4xl md:text-7xl font-bold text-white mb-8 tracking-tight leading-[1.1]">
-            Ventas predecibles para negocios que <span className="text-blue-500 italic font-bold">dejaron de improvisar.</span>
-          </h1>
-
-          {/* H2: El Sistema y la Definición */}
-          <div className="mb-10 space-y-2">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-200 tracking-wide uppercase italic">
-              VEXCALA Sales Operating System
-            </h2>
-            <p className="text-lg md:text-xl text-blue-400 font-medium">
-              Infraestructura de crecimiento comercial diseñada para ordenar, calificar y convertir ventas.
-            </p>
-          </div>
-
-          {/* Supporting Line: Diferenciación y Acción */}
-          <p className="max-w-2xl mx-auto text-slate-400 text-lg md:text-xl leading-relaxed mb-12">
-             No somos una agencia de marketing. Diseñamos e Instalamos sistemas de ventas completos para negocios y marcas personales en crecimiento.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a 
-              href="#apply" 
-              className="group w-full sm:w-auto bg-white text-slate-950 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-500 hover:text-white transition-all flex items-center justify-center gap-2 active:scale-95"
-            >
-              Agendar llamada estratégica
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a 
-              href="#system" 
-              className="w-full sm:w-auto text-slate-400 hover:text-white font-medium px-8 py-4 transition-colors border border-slate-800 rounded-full hover:bg-slate-900/50"
-            >
-              Explorar el sistema
-            </a>
-          </div>
-
-        </div>
-      </div>
-
-      {/* Decoración de scroll sutil */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-20 hidden md:block">
-        <div className="w-1 h-12 rounded-full bg-gradient-to-b from-blue-500 to-transparent" />
-      </div>
+      <style jsx>{`
+        @keyframes shimmer-sweep {
+          0% {
+            transform: translateX(-150%);
+          }
+          100% {
+            transform: translateX(150%);
+          }
+        }
+        .shimmer-sweep {
+          animation: shimmer-sweep 3s linear infinite;
+          will-change: transform;
+        }
+      `}</style>
     </section>
   );
 }

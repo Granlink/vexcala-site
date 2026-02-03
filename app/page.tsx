@@ -1,32 +1,25 @@
 import Hero from "@/components/sections/Hero";
-import Problem from "@/components/sections/Problem";
-import NotAgency from "@/components/sections/NotAgency";
-import System from "@/components/sections/System";
-import Fit from "@/components/sections/Fit";
-import Impact from "@/components/sections/Impact";
-import Process from "@/components/sections/Process";
-import Apply from "@/components/sections/Apply";
-import FinalCTA from "@/components/sections/FinalCTA";
-import FAQ from "@/components/sections/FAQ";
+import Thesis from "@/components/sections/Thesis";
+import Mechanism from "@/components/sections/Mechanism";
+import VisualFlow from "@/components/sections/VisualFlow";
+import QualificationGrid from "@/components/sections/QualificationGrid";
+import VOSAuditor from "@/components/sections/VOSAuditor";
+import DynamicFAQ from "@/components/sections/DynamicFAQ";
 import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <>
-      {/* Sección de Impacto Inicial */}
-     <main>
-  <Hero />
-  <Problem />
-  <NotAgency />
-  <System />
-  <Fit />
-  <Impact />
-  <Process />
-  <Apply />
-  <FinalCTA />
-  <FAQ />
-  <Footer />
-</main>
-    </>
+    <div className="bg-[#000000] min-h-screen selection:bg-[#FF8C00]/30 text-white">
+      <main className="flex flex-col bg-[#000000]">
+        <Hero />
+        <Thesis />
+        <Mechanism />
+        <VisualFlow />
+        <QualificationGrid />
+        <VOSAuditor />
+        <DynamicFAQ userHasFinishedQuiz={false} />
+        <Footer />
+      </main>
+    </div>
   );
 }
