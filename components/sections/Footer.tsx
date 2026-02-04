@@ -107,15 +107,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-gray-900/70 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] uppercase tracking-widest text-gray-500">
-          <p>© {currentYear} Vexcala. Todos los derechos reservados. Construido para el 1%.</p>
-          <div className="flex flex-wrap items-center gap-6">
+        <div className="mt-12 border-t border-gray-900/70 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] uppercase tracking-widest text-gray-500">
+          <p className="text-center md:text-left">
+            © {currentYear} Vexcala. Todos los derechos reservados.{" "}
+            <span className="whitespace-nowrap">Construido para el 1%.</span>
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <a href="#" className="hover:text-white transition-colors">
               Política de Privacidad
             </a>
+            <span className="text-gray-700">|</span>
             <a href="#" className="hover:text-white transition-colors">
               Términos de Servicio
             </a>
+            <span className="text-gray-700">|</span>
             <a href="#" className="hover:text-white transition-colors">
               Acuerdo de Confidencialidad (NDA)
             </a>
