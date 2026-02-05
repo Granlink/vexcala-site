@@ -35,15 +35,16 @@ export default function Hero() {
         >
           VEXCALA Sales Operating System (VOS): infraestructura comercial y automatización comercial para generar citas calificadas B2B cada 24 horas.
         </motion.p>
-        <motion.button
+        <motion.a
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="relative isolate overflow-hidden bg-[#FF8C00] text-black font-black px-8 py-4 rounded-xl shadow-[0_0_36px_rgba(255,140,0,0.45)] hover:scale-105 transition-transform"
+          href="#auditoria-vos"
+          className="inline-block relative isolate overflow-hidden bg-[#FF8C00] text-black font-black px-8 py-4 rounded-xl shadow-[0_0_36px_rgba(255,140,0,0.45)] hover:scale-105 transition-transform"
         >
           <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent)] shimmer-sweep" />
-          INICIAR TEST DE FRAGILIDAD COMERCIAL
-        </motion.button>
+          INICIAR AUDITORÍA DE INFRAESTRUCTURA
+        </motion.a>
         <p className="text-xs text-gray-400 mt-4">
           Toma 2 minutos. Detecta fallos en tu sistema actual.
         </p>

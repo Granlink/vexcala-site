@@ -17,7 +17,7 @@ export default function Home() {
         <VisualFlow />
         <QualificationGrid />
         <VOSAuditor />
-        <DynamicFAQ userHasFinishedQuiz={false} />
+        <DynamicFAQ />
         <Footer />
       </main>
     </div>

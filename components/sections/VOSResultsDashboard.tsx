@@ -17,12 +17,22 @@ type Props = {
 
 export default function VOSResultsDashboard({ score, findings }: Props) {
   const clampedScore = Math.max(0, Math.min(100, score));
+  const range =
+    clampedScore <= 45 ? "critical" : clampedScore <= 80 ? "risk" : "optimized";
+
   const title =
-    clampedScore <= 40
-      ? "Estado Crítico: Tu infraestructura actual está quemando capital."
-      : clampedScore <= 75
-        ? "Estado de Riesgo: Tienes tracción, pero careces de sistemas de escala."
-        : "Estado de Optimización: Tu base es sólida, es momento de automatizar el 99%.";
+    range === "critical"
+      ? "ESTADO CRÍTICO"
+      : range === "risk"
+        ? "RIESGO DE ESCALABILIDAD"
+        : "LISTO PARA ÉLITE";
+
+  const summary =
+    range === "critical"
+      ? "Tu infraestructura es frágil. Estás perdiendo capital por ineficiencia operativa."
+      : range === "risk"
+        ? "Tienes tracción, pero tu sistema colapsará si intentas escalar sin automatización."
+        : "Base sólida. Estás a un paso de la automatización total con Vexcala VOS.";
 
   const radius = 78;
   const stroke = 10;
@@ -30,10 +40,19 @@ export default function VOSResultsDashboard({ score, findings }: Props) {
   const progress = circumference - (clampedScore / 100) * circumference;
 
   const whatsappMessage = encodeURIComponent(
-    `Hola Vexcala, mi Score de Madurez fue de ${clampedScore}%. Necesito optimizar mi infraestructura comercial.`
+    range === "critical"
+      ? `Hola Vexcala, mi Score de Madurez fue de ${clampedScore}%. Score crítico, necesito ayuda urgente para optimizar mi infraestructura comercial.`
+      : range === "risk"
+        ? `Hola Vexcala, mi Score de Madurez fue de ${clampedScore}%. Deseo optimizar mi sistema.`
+        : `Hola Vexcala, mi Score de Madurez fue de ${clampedScore}%. Estoy listo para la automatización total.`
   );
 
-  const calendlyUrl = "https://calendly.com/vexcala/auditoria";
+  const calendlyUrl =
+    range === "critical"
+      ? "https://calendly.com/vexcala/auditoria?score=critical"
+      : range === "risk"
+        ? "https://calendly.com/vexcala/auditoria?score=risk"
+        : "https://calendly.com/vexcala/auditoria?score=optimized";
   const whatsappUrl = `https://wa.me/573025652978?text=${whatsappMessage}`;
 
   return (
@@ -59,7 +78,13 @@ export default function VOSResultsDashboard({ score, findings }: Props) {
               cx="100"
               cy="100"
               r={radius}
-              stroke="url(#vosGradient)"
+              stroke={
+                range === "critical"
+                  ? "#EF4444"
+                  : range === "risk"
+                    ? "url(#vosGradient)"
+                    : "#22C55E"
+              }
               strokeWidth={stroke}
               fill="none"
               strokeLinecap="round"
@@ -81,6 +106,9 @@ export default function VOSResultsDashboard({ score, findings }: Props) {
         <h3 className="text-white text-xl md:text-2xl font-semibold mt-6">
           {title}
         </h3>
+        <p className="text-white/70 text-sm md:text-base mt-2 max-w-2xl">
+          {summary}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
@@ -113,7 +141,11 @@ export default function VOSResultsDashboard({ score, findings }: Props) {
               rel="noopener noreferrer"
               className="block w-full text-center bg-[#FF8C00] text-black font-black py-4 rounded-2xl tracking-widest text-sm uppercase hover:brightness-95 transition-all animate-pulse"
             >
-              Agendar Auditoría de Implementación Gratuita
+              {range === "critical"
+                ? "Agendar Auditoría de Rescate Inmediata"
+                : range === "risk"
+                  ? "Agendar Auditoría de Implementación Gratuita"
+                  : "Agendar Auditoría de Escalamiento"}
             </a>
             <p className="text-white/70 text-xs mt-2">
               Evaluaremos tu caso en 15 min vía Zoom.

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Plus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 type FAQItem = {
   question: string;
@@ -9,7 +10,7 @@ type FAQItem = {
 };
 
 type Props = {
-  userHasFinishedQuiz: boolean;
+  userHasFinishedQuiz?: boolean;
   variant?: "explore" | "conversion";
 };
 
@@ -49,14 +50,27 @@ const conversionFaqs: FAQItem[] = [
   },
 ];
 
-export default function DynamicFAQ({ userHasFinishedQuiz, variant = "explore" }: Props) {
+export default function DynamicFAQ({ userHasFinishedQuiz, variant }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [showBanner, setShowBanner] = useState(false);
+  const [isDiagnosed, setIsDiagnosed] = useState<boolean>(false);
 
-  const items = variant === "conversion" ? conversionFaqs : explorationFaqs;
+  useEffect(() => {
+    if (typeof userHasFinishedQuiz === "boolean") {
+      setIsDiagnosed(userHasFinishedQuiz);
+      return;
+    }
+    const saved = window.localStorage.getItem("vosDiagnosed");
+    setIsDiagnosed(saved === "true");
+  }, [userHasFinishedQuiz]);
+
+  const resolvedVariant =
+    variant ?? (isDiagnosed ? "conversion" : "explore");
+
+  const items = resolvedVariant === "conversion" ? conversionFaqs : explorationFaqs;
 
   const jsonLd = useMemo(() => {
-    if (variant !== "explore") return "";
+    if (resolvedVariant !== "explore") return "";
     const data = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -74,17 +88,17 @@ export default function DynamicFAQ({ userHasFinishedQuiz, variant = "explore" }:
 
   const handleToggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
-    if (!userHasFinishedQuiz && variant === "explore") {
+    if (!isDiagnosed && resolvedVariant === "explore") {
       setShowBanner(true);
     }
   };
 
   return (
     <section
-      id={variant === "explore" ? "section-faq" : undefined}
-      className={variant === "explore" ? "py-[120px] bg-[#000000]" : ""}
+      id={resolvedVariant === "explore" ? "section-faq" : undefined}
+      className={resolvedVariant === "explore" ? "py-[120px] bg-[#000000]" : ""}
     >
-      {variant === "explore" && (
+      {resolvedVariant === "explore" && (
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-10">
             <span className="text-[#FF8C00] text-[11px] font-bold tracking-[0.3em] uppercase">
@@ -97,62 +111,69 @@ export default function DynamicFAQ({ userHasFinishedQuiz, variant = "explore" }:
         </div>
       )}
 
-      <div
-        className={
-          variant === "explore"
-            ? "max-w-5xl mx-auto px-6"
-            : "border border-orange-500/20 rounded-2xl p-6 bg-white/[0.02]"
-        }
-      >
-        {variant === "conversion" && (
-          <div className="text-white text-sm font-semibold mb-4">
-            Preguntas sobre tu Diagnóstico
-          </div>
-        )}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={resolvedVariant}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35 }}
+          className={
+            resolvedVariant === "explore"
+              ? "max-w-5xl mx-auto px-6"
+              : "border border-orange-500/20 rounded-2xl p-6 pb-8 bg-white/[0.02]"
+          }
+        >
+          {resolvedVariant === "conversion" && (
+            <div className="text-white text-sm font-semibold mb-4">
+              Preguntas sobre tu Diagnóstico
+            </div>
+          )}
 
-        <div className="divide-y divide-white/10">
-          {items.map((item, index) => {
-            const isOpen = openIndex === index;
-            return (
-              <div key={item.question} className="py-4">
-                <button
-                  type="button"
-                  onClick={() => handleToggle(index)}
-                  className="w-full flex items-center justify-between text-left text-white/90 font-medium"
-                >
-                  <span>{item.question}</span>
-                  <Plus
-                    className={`h-4 w-4 text-white/60 transition-transform ${
-                      isOpen ? "rotate-45" : "rotate-0"
+          <div className="divide-y divide-white/10">
+            {items.map((item, index) => {
+              const isOpen = openIndex === index;
+              return (
+                <div key={item.question} className="py-4">
+                  <button
+                    type="button"
+                    onClick={() => handleToggle(index)}
+                    className="w-full flex items-center justify-between text-left text-white/90 font-medium"
+                  >
+                    <span>{item.question}</span>
+                    <Plus
+                      className={`h-4 w-4 text-white/60 transition-transform ${
+                        isOpen ? "rotate-45" : "rotate-0"
+                      }`}
+                    />
+                  </button>
+                  <div
+                    className={`grid transition-all duration-300 ease-out ${
+                      isOpen ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0"
                     }`}
-                  />
-                </button>
-                <div
-                  className={`grid transition-all duration-300 ease-out ${
-                    isOpen ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0"
-                  }`}
-                >
-                  <div className="overflow-hidden text-white/70 text-sm leading-relaxed">
-                    {item.answer}
+                  >
+                    <div className="overflow-hidden text-white/70 text-sm leading-relaxed">
+                      {item.answer}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {showBanner && variant === "explore" && (
-          <div className="mt-6 border border-white/10 rounded-xl p-4 text-sm text-white/80 bg-white/[0.02]">
-            ¿Quieres respuestas personalizadas? Realiza el Auditor VOS{" "}
-            <a href="#section-auditor" className="text-[#FF8C00] underline">
-              aquí
-            </a>
-            .
+              );
+            })}
           </div>
-        )}
-      </div>
 
-      {variant === "explore" && jsonLd && (
+          {showBanner && resolvedVariant === "explore" && (
+            <div className="mt-6 border border-white/10 rounded-xl p-4 text-sm text-white/80 bg-white/[0.02]">
+              ¿Quieres respuestas personalizadas? Realiza el Auditor VOS{" "}
+              <a href="#section-auditor" className="text-[#FF8C00] underline">
+                aquí
+              </a>
+              .
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+
+      {resolvedVariant === "explore" && jsonLd && (
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger

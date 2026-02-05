@@ -21,7 +21,7 @@ export default function Navbar() {
         {/* Menú ancla (Centro) */}
         <div className="hidden md:flex items-center gap-10">
             {[
-              { name: "El Sistema", href: "#section-hero" },
+              { name: "El Sistema", href: "#section-mechanism" },
               { name: "Para quién es", href: "#section-qualification" },
               { name: "FAQ", href: "#section-faq" }
             ].map((item) => (
